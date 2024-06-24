@@ -53,7 +53,7 @@ return {
 }
 ```
 
-### Key Mappings
+### Default Key Mappings
 
 - **`<Leader>k`:** JSON Parse
 

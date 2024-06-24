@@ -1,6 +1,8 @@
 local M = {} -- M stands for module, a naming convention
 local tb = require("telescope.builtin")
 
+require("devtools.openapi")
+
 function M.setup(opts)
 	opts = opts or {}
 	local keymaps = opts.keymaps or {}
