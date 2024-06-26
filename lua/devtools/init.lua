@@ -1,10 +1,14 @@
 local M = {} -- M stands for module, a naming convention
 local tb = require("telescope.builtin")
+local openapi = require("devtools.openapi")
 
 require("devtools.openapi")
 
 function M.setup(opts)
 	opts = opts or {}
+	local swagger_patterns = { "openapi.yaml", "openapi-spec.yaml" }
+
+	M.swagger_patterns = opts.swagger_patterns or swagger_patterns
 	local keymaps = opts.keymaps or {}
 
 	local jsonparse_key = keymaps.jsonparse or "<Leader>k"
@@ -18,6 +22,9 @@ function M.setup(opts)
 		local text = vim.getVisualSelection()
 		tb.current_buffer_fuzzy_find({ default_text = text })
 	end, { desc = "Find in selection visual text" })
+
+	openapi.setup(opts.openapi)
+	M.autoload()
 end
 
 function M.jsonparse()
@@ -54,6 +61,18 @@ function M.fetch_ip()
 	end
 end
 
+function M.swaggerPreview()
+	openapi.start_server()
+end
+
+function M.swaggerStop()
+	openapi.stop_server()
+end
+
+function M.swaggerToggle()
+	openapi.toggle_server()
+end
+
 function vim.getVisualSelection()
 	vim.cmd('noau normal! "vy"')
 	local text = vim.fn.getreg("v")
@@ -76,7 +95,33 @@ function M.execute(tool_name)
 end
 
 function M.complete_tools(arglead, cmdline, cursorpos)
-	return { "fetch_ip", "jsonparse" }
+	return { "fetch_ip", "jsonparse", "swaggerPreview", "swaggerStop", "swaggerToggle" }
+end
+
+function M.autoload()
+	-- Autocommand to start/stop the server based on file events
+	vim.api.nvim_create_augroup("SwaggerPreviewGroup", { clear = true })
+
+	-- Add patterns for different filenames
+	for _, pattern in ipairs(M.swagger_patterns) do
+		vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+			group = "SwaggerPreviewGroup",
+			pattern = pattern,
+			callback = function()
+				M.swaggerPreview()
+			end,
+		})
+	end
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		group = "SwaggerPreviewGroup",
+		callback = function()
+			local file_name = vim.fn.expand("%:t")
+			if not vim.tbl_contains({}, file_name) then
+				M.swaggerStop()
+			end
+		end,
+	})
 end
 
 return M

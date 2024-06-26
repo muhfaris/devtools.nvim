@@ -1,7 +1,7 @@
 local openapi = {}
 
 function openapi.setup(config)
-	openapi.port = config.port or 8000
+	openapi.port = config.port or 4000
 	openapi.host = config.host or "localhost"
 end
 
