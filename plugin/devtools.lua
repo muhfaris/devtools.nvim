@@ -1,15 +1,15 @@
 -- Check if devtools is already loaded
 if vim.g.loaded_devtools then
-  return
+	return
 end
 vim.g.loaded_devtools = true
 
 -- Define the Devtools command
 vim.api.nvim_create_user_command("DevTools", function(opts)
-  require("devtools").execute(opts.args)
+	require("devtools").execute(opts.args)
 end, {
-  nargs = 1,
-  complete = function(arglead, cmdline, cursorpos)
-    return require("devtools").complete_tools(arglead, cmdline, cursorpos)
-  end,
+	nargs = 1,
+	complete = function(arglead, cmdline, cursorpos)
+		return require("devtools").complete_tools(arglead, cmdline, cursorpos)
+	end,
 })

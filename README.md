@@ -10,6 +10,14 @@ The `devtools` plugin enhances Neovim with utilities for various development tas
 - **IP Address Fetching:** Fetch your public IP address using the `curl` command and display it in Neovim.
 - **Find selection visual:** Find text from visual selection text.
 
+## Requirement
+
+- Install `swagger-ui-watcher` for serve `openapi.yaml` or `openapi-spec.yaml`
+
+```bash
+ npm install swagger-ui-watcher -g
+```
+
 ## Installation
 
 Install the `devtools` plugin using your favorite plugin manager:
@@ -53,7 +61,7 @@ return {
 }
 ```
 
-### Key Mappings
+### Default Key Mappings
 
 - **`<Leader>k`:** JSON Parse
 
@@ -88,10 +96,17 @@ Customize key mappings by specifying them in the `setup()` function call:
 
 ```lua
 require('devtools').setup({
+    openapi = {
+      port = 4000,
+    },
     keymaps = {
         jsonparse = "<Leader>j",       -- Custom key mapping for JSON parse
         visual_fuzzy_find = "<Leader>g"  -- Custom key mapping for Visual Fuzzy Find
-    }
+    },
+    swagger_patterns = {
+    "openapi.yaml",
+    "openapi-spec.yaml",
+  }
 })
 ```
 
