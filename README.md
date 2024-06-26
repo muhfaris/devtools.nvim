@@ -9,10 +9,11 @@ The `devtools` plugin enhances Neovim with utilities for various development tas
 - **JSON Parsing:** Convert selected JSON text into a Lua table and replace it in the buffer.
 - **IP Address Fetching:** Fetch your public IP address using the `curl` command and display it in Neovim.
 - **Find selection visual:** Find text from visual selection text.
+- **Serve Openapi Spec:** You can serve openapi spec into swagger-ui
 
 ## Requirement
 
-- Install `swagger-ui-watcher` for serve `openapi.yaml` or `openapi-spec.yaml`
+- Install `swagger-ui-watcher` for serve `openapi.yaml` or `openapi-spec.yaml` (default)
 
 ```bash
  npm install swagger-ui-watcher -g
