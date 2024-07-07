@@ -1,127 +1,59 @@
-local M = {} -- M stands for module, a naming convention
-local tb = require("telescope.builtin")
-local openapi = require("devtools.openapi")
+local M = {}
+local _loaded = false
+local _mappings = require("devtools.mappings")
+local _word = require("devtools.actions.word")
 
-require("devtools.openapi")
+-- Function to register key mappings
+local function register_mappings(mappings)
+	for mode, mode_mappings in pairs(mappings) do
+		for key, action in pairs(mode_mappings) do
+			vim.keymap.set(mode, key, action.func, { desc = action.desc })
+		end
+	end
+end
 
 function M.setup(opts)
 	opts = opts or {}
-	local swagger_patterns = { "openapi.yaml", "openapi-spec.yaml" }
-
-	M.swagger_patterns = opts.swagger_patterns or swagger_patterns
-	local keymaps = opts.keymaps or {}
-
-	local jsonparse_key = keymaps.jsonparse or "<Leader>k"
-	local vfuzzy_find_key = keymaps.visual_fuzzy_find or "<Leader>f"
-
-	vim.keymap.set("v", jsonparse_key, function()
-		M.jsonparse()
-	end, { desc = "Parse json string from selection visual text" })
-
-	vim.keymap.set("v", vfuzzy_find_key, function()
-		local text = vim.getVisualSelection()
-		tb.current_buffer_fuzzy_find({ default_text = text })
-	end, { desc = "Find in selection visual text" })
-
-	openapi.setup(opts.openapi)
-	M.autoload()
-end
-
-function M.jsonparse()
-	local text = vim.getVisualSelection()
-	local raw = vim.fn.json_decode(text)
-
-	-- Delete the selected text
-	vim.cmd("normal! gvd")
-	-- Put the new text in the register
-	vim.fn.setreg("v", raw)
-	-- Paste the new text
-	vim.cmd('normal! "vp')
-
-	-- Optionally, move the cursor to the end of the newly inserted text
-	vim.cmd("normal! `[v`]h")
-	return raw
-	-- local raw = require("json").decode(txt)
-end
-
-function M.fetch_ip()
-	local handle = io.popen("curl -s https://api.ipify.org")
-	if handle == nil then
-		vim.api.nvim_out_write("Failed to execute curl command.\n")
-		return
-	end
-
-	local result = handle:read("*a")
-	handle:close()
-
-	if result then
-		vim.api.nvim_out_write("Your public IP address is: " .. result .. "\n")
-	else
-		vim.api.nvim_out_write("Failed to retrieve IP address.\n")
-	end
-end
-
-function M.swaggerPreview()
-	openapi.start_server()
-end
-
-function M.swaggerStop()
-	openapi.stop_server()
-end
-
-function M.swaggerToggle()
-	openapi.toggle_server()
-end
-
-function vim.getVisualSelection()
-	vim.cmd('noau normal! "vy"')
-	local text = vim.fn.getreg("v")
-	vim.fn.setreg("v", {})
-
-	text = string.gsub(text, "\n", "")
-	if #text > 0 then
-		return text
-	else
-		return ""
-	end
+	opts.mappings = opts.mappings or _mappings.default
+	register_mappings(opts.mappings)
+	_word.word_wrap(opts.word_wrap)
 end
 
 function M.execute(tool_name)
-	if M[tool_name] then
-		M[tool_name]()
+	local _tool = M.tools[tool_name]
+
+	if _tool ~= nil then
+		_tool()
 	else
 		vim.api.nvim_out_write("Invalid tool name: " .. tool_name .. "\n")
 	end
 end
 
 function M.complete_tools(arglead, cmdline, cursorpos)
-	return { "fetch_ip", "jsonparse", "swaggerPreview", "swaggerStop", "swaggerToggle" }
-end
+	local matches = {}
+	if not _loaded then
+		local _config = require("devtools.config").register_tools()
+		if _config == nil then
+			return matches
+		end
 
-function M.autoload()
-	-- Autocommand to start/stop the server based on file events
-	vim.api.nvim_create_augroup("SwaggerPreviewGroup", { clear = true })
+		if _config.completed_tools == nil then
+			return matches
+		end
 
-	-- Add patterns for different filenames
-	for _, pattern in ipairs(M.swagger_patterns) do
-		vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-			group = "SwaggerPreviewGroup",
-			pattern = pattern,
-			callback = function()
-				M.swaggerPreview()
-			end,
-		})
+		local tools = {}
+		local tools_name = {}
+		for _, tool in pairs(_config.completed_tools) do
+			local tool_name = tool.category .. "." .. tool.tool
+			tools[tool_name] = tool.func
+			table.insert(tools_name, tool_name)
+		end
+
+		M.tools = tools
+		M.tools_name = tools_name
 	end
 
-	vim.api.nvim_create_autocmd("BufEnter", {
-		group = "SwaggerPreviewGroup",
-		callback = function()
-			local file_name = vim.fn.expand("%:t")
-			if not vim.tbl_contains({}, file_name) then
-				M.swaggerStop()
-			end
-		end,
-	})
+	return M.tools_name
 end
 
 return M
