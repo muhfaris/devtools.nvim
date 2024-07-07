@@ -41,7 +41,7 @@ return {
           },
         },
         n = {
-          ["<Leader>myp"] = {
+          ["<Leader>mip"] = {
             func = actions.net.my_ip.func,
             desc = "Get my public IP address",
           },
@@ -56,7 +56,7 @@ return {
 ### Default Key Mappings
 
 - **`<Leader>jp`:** JSON Parse
-- **`<Leader>myp`:** My Public IP
+- **`<Leader>mip`:** My Public IP
 
 ## Contributing
 
