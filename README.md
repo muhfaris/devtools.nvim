@@ -6,110 +6,57 @@ The `devtools` plugin enhances Neovim with utilities for various development tas
 
 ## Features
 
-- **JSON Parsing:** Convert selected JSON text into a Lua table and replace it in the buffer.
+- **JSON Parsing:** Convert selected JSON text into a JSON object and replace it in the buffer.
 - **IP Address Fetching:** Fetch your public IP address using the `curl` command and display it in Neovim.
-- **Find selection visual:** Find text from visual selection text.
-- **Serve Openapi Spec:** You can serve openapi spec into swagger-ui
-
-## Requirement
-
-- Install `swagger-ui-watcher` for serve `openapi.yaml` or `openapi-spec.yaml` (default)
-
-```bash
- npm install swagger-ui-watcher -g
-```
 
 ## Installation
 
 Install the `devtools` plugin using your favorite plugin manager:
 
-```vim
-" Using vim-plug
-Plug 'muhfaris/devtools.nvim'
-
-" Using packer.nvim
-use 'muhfaris/devtools.nvim'
+```lua
+" Using lazy.nvim
+return {
+  "muhfaris/devtools.nvim",
+  opts =  {}
+}
 ```
-
-Replace `'muhfaris/devtools.nvim'` with the actual path to your plugin.
 
 ## Usage
 
-### Setup
+### Customize key mappings
 
-In your Neovim configuration (e.g., `init.lua`), setup `devtools` with optional key mappings:
-
-```lua
-require('devtools').setup({
-    keymaps = {
-        jsonparse = "<Leader>k",       -- Default: <Leader>k
-        visual_fuzzy_find = "<Leader>f"  -- Default: <Leader>f
-    }
-})
-```
-
-or using lazy.nvim
+Using lazy.nvim
 
 ```lua
 return {
   "muhfaris/devtools.nvim",
-  opts = {
-    keymaps = {
-      jsonparse = "<Leader>j",
-      visual_fuzzy_find = "<Leader>h",
-    },
-  },
+  opts = function()
+    local actions = require "devtools.actions"
+    return {
+      mappings = {
+        v = {
+          ["<Leader>jp"] = {
+            func = actions.json.parse.func,
+            desc = "Parse json string from selection visual text",
+          },
+        },
+        n = {
+          ["<Leader>myp"] = {
+            func = actions.net.my_ip.func,
+            desc = "Get my public IP address",
+          },
+        },
+      },
+    }
+  end,
+,
 }
 ```
 
 ### Default Key Mappings
 
-- **`<Leader>k`:** JSON Parse
-
-  - Convert selected JSON text into a Lua table.
-  - Replace the selected text with the parsed JSON.
-
-- **`<Leader>f`:** Visual Fuzzy Find
-  - Perform a fuzzy find within the current buffer using the selected text as the default search term.
-
-### Commands
-
-Use `:DevTools <tool>` to execute specific tools:
-
-- **`:DevTools fetch_ip`**
-
-  - Fetch your public IP address and display it in the Neovim message area.
-
-- **`:Devtools jsonparse`**
-  - Convert the selected JSON text into a Lua table and replace it in the buffer.
-
-### Autocompletion
-
-After typing `:DevTools`, press `<Tab>` to autocomplete available tools:
-
-```vim
-:DevTools <Tab>
-```
-
-### Customization
-
-Customize key mappings by specifying them in the `setup()` function call:
-
-```lua
-require('devtools').setup({
-    openapi = {
-      port = 4000,
-    },
-    keymaps = {
-        jsonparse = "<Leader>j",       -- Custom key mapping for JSON parse
-        visual_fuzzy_find = "<Leader>g"  -- Custom key mapping for Visual Fuzzy Find
-    },
-    swagger_patterns = {
-    "openapi.yaml",
-    "openapi-spec.yaml",
-  }
-})
-```
+- **`<Leader>jp`:** JSON Parse
+- **`<Leader>myp`:** My Public IP
 
 ## Contributing
 
