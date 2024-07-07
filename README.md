@@ -1,4 +1,4 @@
-# devtools Neovim Plugin
+# DevTools Neovim Plugin
 
 ## Overview
 
