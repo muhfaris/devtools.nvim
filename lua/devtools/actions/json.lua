@@ -3,19 +3,20 @@ local _c = require("devtools.actions.common")
 local JSON = {}
 
 function JSON.json_parse()
-  local text = _c.get_visual_selection()
-  local raw = _v.fn.json_decode(text)
+	local text = _c.get_visual_selection()
+	local raw = _v.fn.json_decode(text)
 
-  -- Delete the selected text
-  _v.cmd("normal! gvd")
-  -- Put the new text in the register
-  _v.fn.setreg("v", raw)
-  -- Paste the new text
-  _v.cmd('normal! "vp')
+	_c.replace_selection(raw)
+	return raw
+end
 
-  -- Optionally, move the cursor to the end of the newly inserted text
-  _v.cmd("normal! `[v`]h")
-  return raw
+function JSON.json_string()
+	local text = _c.get_visual_selection()
+	local json_string = vim.fn.json_encode(text)
+
+	-- Escape double quotes for the JSON string
+	local remove_t = json_string:gsub("\\t", "")
+	_c.replace_selection(remove_t)
 end
 
 return JSON

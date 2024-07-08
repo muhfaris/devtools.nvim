@@ -7,6 +7,7 @@ The `devtools` plugin enhances Neovim with utilities for various development tas
 ## Features
 
 - **JSON Parsing:** Convert selected JSON text into a JSON object and replace it in the buffer.
+- **JSON String:** Convert a JSON object into a JSON string and replace it in the buffer.
 - **IP Address Fetching:** Fetch your public IP address using the `curl` command and display it in Neovim.
 
 ## Installation
@@ -56,6 +57,7 @@ return {
 ### Default Key Mappings
 
 - **`<Leader>jp`:** JSON Parse
+- **`<Leader>js`:** JSON Parse
 - **`<Leader>mip`:** My Public IP
 
 ## Contributing

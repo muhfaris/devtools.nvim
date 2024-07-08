@@ -5,7 +5,11 @@ mappings.default = {
 	v = {
 		["<Leader>jp"] = {
 			func = _actions.json.parse.func,
-			desc = "Parse json string from selection visual text",
+			desc = "Parse json string to object",
+		},
+		["<Leader>js"] = {
+			func = _actions.json.string.func,
+			desc = "Parse into json string",
 		},
 	},
 	n = {

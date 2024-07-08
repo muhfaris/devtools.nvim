@@ -19,41 +19,72 @@ function M.setup(opts)
 	_word.word_wrap(opts.word_wrap)
 end
 
-function M.execute(tool_name)
-	local _tool = M.tools[tool_name]
+function M.execute(...)
+	local args = { ... }
+	local tool_name = ""
+	for _, arg_value in pairs(args) do
+		for _, arg in pairs(arg_value) do
+			local req_args = vim.split(arg, " ")
+			tool_name = req_args[1]
+			table.remove(req_args, 1)
 
-	if _tool ~= nil then
+			-- Overwrite the args
+			args = req_args
+		end
+	end
+
+	if M.tools == nil then
+		local tools, tools_name = M.load_tools()
+		if tools == nil or tools_name == nil then
+			vim.api.nvim_out_write("Not available tools: " .. tool_name .. "\n")
+			return
+		end
+	end
+
+	local _tool = M.tools[tool_name]
+	if _tool ~= nil and args ~= nil then
+		_tool(args)
+	elseif _tool ~= nil then
 		_tool()
 	else
-		vim.api.nvim_out_write("Invalid tool name: " .. tool_name .. "\n")
+		vim.api.nvim_out_write("Tool not found: " .. tool_name .. "\n")
 	end
 end
 
 function M.complete_tools(arglead, cmdline, cursorpos)
-	local matches = {}
 	if not _loaded then
-		local _config = require("devtools.config").register_tools()
-		if _config == nil then
-			return matches
+		local tools, tools_name = M.load_tools()
+		if tools == nil or tools_name == nil then
+			return M.tools_name
 		end
 
-		if _config.completed_tools == nil then
-			return matches
-		end
-
-		local tools = {}
-		local tools_name = {}
-		for _, tool in pairs(_config.completed_tools) do
-			local tool_name = tool.category .. "." .. tool.tool
-			tools[tool_name] = tool.func
-			table.insert(tools_name, tool_name)
-		end
-
-		M.tools = tools
-		M.tools_name = tools_name
+		_loaded = true
 	end
 
 	return M.tools_name
+end
+
+function M.load_tools()
+	local _config = require("devtools.config").register_tools()
+	if _config == nil then
+		return {}
+	end
+
+	if _config.completed_tools == nil then
+		return {}
+	end
+
+	local tools = {}
+	local tools_name = {}
+	for _, tool in pairs(_config.completed_tools) do
+		local tool_name = tool.category .. "." .. tool.tool
+		tools[tool_name] = tool.func
+		table.insert(tools_name, tool_name)
+	end
+
+	M.tools = tools
+	M.tools_name = tools_name
+	return tools, tools_name
 end
 
 return M
