@@ -2,13 +2,14 @@
 
 ## Overview
 
-The `devtools` plugin enhances Neovim with utilities for various development tasks, including JSON parsing, IP address fetching, and more.
+The plugin [muhfaris/devtools.nvim](https://github.com/muhfaris/devtools.nvim) is in active development. The purpose of this plugin is to be swiss army knife for developers.
 
 ## Features
 
-- **JSON Parsing:** Convert selected JSON text into a JSON object and replace it in the buffer.
-- **JSON String:** Convert a JSON object into a JSON string and replace it in the buffer.
-- **IP Address Fetching:** Fetch your public IP address using the `curl` command and display it in Neovim.
+- Configurable key mappings
+- Eased automatic word wrapping and custom file type
+- Parse and escape JSON
+- Fetch my public IP address
 
 ## Installation
 
@@ -50,15 +51,60 @@ return {
       },
     }
   end,
-,
+}
+```
+
+### Custom automatic word wrapping
+
+```lua
+return {
+  "muhfaris/devtools.nvim",
+  opts = function()
+    return {
+      word_wrap= {
+        markdown = {
+          wrap = true,
+          textwidth = 30,
+          linebreak = true,
+        },
+      },
+    }
+  end,
+}
+```
+
+### Custom automatic word wrapping with custom file type
+
+```lua
+return {
+  "muhfaris/devtools.nvim",
+  opts = function()
+    return {
+      word_wrap = {
+        markdown = {
+          wrap = true,
+          textwidth = 30,
+          linebreak = true,
+        },
+        tpl = {
+          wrap = true,
+          textwidth = 30,
+          linebreak = true,
+          pattern = "*.tpl,*.tmpl",
+        },
+      },
+    }
+  end,
 }
 ```
 
 ### Default Key Mappings
 
-- **`<Leader>jp`:** JSON Parse
-- **`<Leader>js`:** JSON Parse
-- **`<Leader>mip`:** My Public IP
+| Mode | Key         | Function                            | Description                                |
+| ---- | ----------- | ----------------------------------- | ------------------------------------------ |
+| `v`  | <Leader>jp  | `devtools.actions.json.parse.func`  | Parse escaped json string into json object |
+| `v`  | <Leader>je  | `devtools.actions.json.escape.func` | Parse json object into escaped json string |
+| `n`  | <Leader>mip | `devtools.actions.net.my_ip.func`   | Get my public IP address                   |
 
 ## Contributing
 

@@ -7,8 +7,8 @@ mappings.default = {
 			func = _actions.json.parse.func,
 			desc = "Parse json string to object",
 		},
-		["<Leader>js"] = {
-			func = _actions.json.string.func,
+		["<Leader>je"] = {
+			func = _actions.json.escape.func,
 			desc = "Parse into json string",
 		},
 	},

@@ -10,8 +10,8 @@ local A = {
 			is_command = false,
 			is_key_bind = true,
 		},
-		string = {
-			func = _json.json_string,
+		escape = {
+			func = _json.json_escape,
 			is_command = false,
 			is_key_bind = true,
 		},

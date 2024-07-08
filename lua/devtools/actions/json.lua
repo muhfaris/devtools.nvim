@@ -10,7 +10,7 @@ function JSON.json_parse()
 	return raw
 end
 
-function JSON.json_string()
+function JSON.json_escape()
 	local text = _c.get_visual_selection()
 	local json_string = vim.fn.json_encode(text)
 
