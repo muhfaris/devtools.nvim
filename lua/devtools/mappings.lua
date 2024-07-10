@@ -11,6 +11,14 @@ mappings.default = {
 			func = _actions.json.escape.func,
 			desc = "Parse into json string",
 		},
+		["<Leader>be"] = {
+			func = _actions.encode.v_base64_encode.func,
+			desc = "Encode base64",
+		},
+		["<Leader>bd"] = {
+			func = _actions.encode.v_base64_decode.func,
+			desc = "Decode base64",
+		},
 	},
 	n = {
 		["<Leader>mip"] = {

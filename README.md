@@ -10,6 +10,7 @@ The plugin [muhfaris/devtools.nvim](https://github.com/muhfaris/devtools.nvim) i
 - Eased automatic word wrapping and custom file type
 - Parse and escape JSON
 - Fetch my public IP address
+- Encode and decode base64
 
 ## Installation
 
@@ -100,11 +101,13 @@ return {
 
 ### Default Key Mappings
 
-| Mode | Key         | Function                            | Description                                |
-| ---- | ----------- | ----------------------------------- | ------------------------------------------ |
-| `v`  | <Leader>jp  | `devtools.actions.json.parse.func`  | Parse escaped json string into json object |
-| `v`  | <Leader>je  | `devtools.actions.json.escape.func` | Parse json object into escaped json string |
-| `n`  | <Leader>mip | `devtools.actions.net.my_ip.func`   | Get my public IP address                   |
+| Mode | Key         | Function                                     | Description                                |
+| ---- | ----------- | -------------------------------------------- | ------------------------------------------ |
+| `v`  | <Leader>jp  | `devtools.actions.json.parse.func`           | Parse escaped json string into json object |
+| `v`  | <Leader>je  | `devtools.actions.json.escape.func`          | Parse json object into escaped json string |
+| `v`  | <Leader>be  | `devtools.actions.encode.base64_encode.func` | Encode base64 string                       |
+| `v`  | <Leader>bd  | `devtools.actions.encode.base64_decode.func` | Decode base64 string                       |
+| `n`  | <Leader>mip | `devtools.actions.net.my_ip.func`            | Get my public IP address                   |
 
 ## Contributing
 
