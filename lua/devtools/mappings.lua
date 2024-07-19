@@ -1,5 +1,5 @@
 local mappings = {}
-local _actions = require("devtools.actions")
+local _actions = require("devtools.actions").tools
 
 mappings.default = {
 	v = {
@@ -9,7 +9,7 @@ mappings.default = {
 		},
 		["<Leader>je"] = {
 			func = _actions.json.escape.func,
-			desc = "Parse into json string",
+			desc = "Escape the json object",
 		},
 		["<Leader>be"] = {
 			func = _actions.encode.v_base64_encode.func,

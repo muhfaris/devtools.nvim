@@ -8,6 +8,7 @@ vim.g.loaded_devtools = true
 vim.api.nvim_create_user_command("DevTools", function(opts)
 	require("devtools").execute(opts.fargs)
 end, {
+	range = true,
 	nargs = 1,
 	complete = function(arglead, cmdline, cursorpos)
 		return require("devtools").complete_tools(arglead, cmdline, cursorpos)

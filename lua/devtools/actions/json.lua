@@ -2,16 +2,38 @@ local _v = vim
 local _c = require("devtools.actions.common")
 local JSON = {}
 
-function JSON.json_parse()
-	local text = _c.get_visual_selection()
+function JSON.json_parse(is_command)
+	local text
+	if is_command then
+		text = _c.get_visual_selection_cmd()
+	else
+		text = _c.get_visual_selection()
+	end
+
+	if text == "" then
+		print("No text selected")
+		return
+	end
+
 	local raw = _v.fn.json_decode(text)
 
 	_c.replace_selection(raw)
 	return raw
 end
 
-function JSON.json_escape()
-	local text = _c.get_visual_selection()
+function JSON.json_escape(is_command)
+	local text
+	if is_command then
+		text = _c.get_visual_selection_cmd()
+	else
+		text = _c.get_visual_selection()
+	end
+
+	if text == "" then
+		print("No text selected")
+		return
+	end
+
 	local json_string = vim.fn.json_encode(text)
 
 	-- Escape double quotes for the JSON string

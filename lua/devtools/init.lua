@@ -2,6 +2,7 @@ local M = {}
 local _loaded = false
 local _mappings = require("devtools.mappings")
 local _word = require("devtools.actions.word")
+local _actions = require("devtools.actions")
 
 -- Function to register key mappings
 local function register_mappings(mappings)
@@ -13,10 +14,19 @@ local function register_mappings(mappings)
 end
 
 function M.setup(opts)
+	local default_opts = {
+		actions = _actions,
+	}
+
 	opts = opts or {}
+	table.insert(opts, default_opts)
+
 	opts.mappings = opts.mappings or _mappings.default
 	register_mappings(opts.mappings)
 	_word.word_wrap(opts.word_wrap)
+
+	-- assign opts
+	M.opts = opts
 end
 
 function M.execute(...)
@@ -45,7 +55,7 @@ function M.execute(...)
 	if _tool ~= nil and args ~= nil then
 		_tool(args)
 	elseif _tool ~= nil then
-		_tool()
+		_tool(true)
 	else
 		vim.api.nvim_out_write("Tool not found: " .. tool_name .. "\n")
 	end
@@ -67,11 +77,11 @@ end
 function M.load_tools()
 	local _config = require("devtools.config").register_tools()
 	if _config == nil then
-		return {}
+		return nil, nil
 	end
 
 	if _config.completed_tools == nil then
-		return {}
+		return nil, nil
 	end
 
 	local tools = {}

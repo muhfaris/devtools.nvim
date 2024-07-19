@@ -1,5 +1,9 @@
 # DevTools Neovim Plugin
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J.svg)](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J)
+
 ## Overview
 
 The plugin [muhfaris/devtools.nvim](https://github.com/muhfaris/devtools.nvim) is in active development. The purpose of this plugin is to be swiss army knife for developers.
@@ -39,13 +43,13 @@ return {
       mappings = {
         v = {
           ["<Leader>jp"] = {
-            func = actions.json.parse.func,
+            func = actions.call "json.parse",
             desc = "Parse json string from selection visual text",
           },
         },
         n = {
           ["<Leader>mip"] = {
-            func = actions.net.my_ip.func,
+            func = actions.call "net.my_ip",
             desc = "Get my public IP address",
           },
         },
@@ -101,13 +105,23 @@ return {
 
 ### Default Key Mappings
 
-| Mode | Key         | Function                                     | Description                                |
-| ---- | ----------- | -------------------------------------------- | ------------------------------------------ |
-| `v`  | <Leader>jp  | `devtools.actions.json.parse.func`           | Parse escaped json string into json object |
-| `v`  | <Leader>je  | `devtools.actions.json.escape.func`          | Parse json object into escaped json string |
-| `v`  | <Leader>be  | `devtools.actions.encode.base64_encode.func` | Encode base64 string                       |
-| `v`  | <Leader>bd  | `devtools.actions.encode.base64_decode.func` | Decode base64 string                       |
-| `n`  | <Leader>mip | `devtools.actions.net.my_ip.func`            | Get my public IP address                   |
+| Mode | Key         | Actions Name           | Description                                |
+| ---- | ----------- | ---------------------- | ------------------------------------------ |
+| `v`  | <Leader>jp  | `json.parse`           | Parse escaped json string into json object |
+| `v`  | <Leader>je  | `json.escape`          | Parse json object into escaped json string |
+| `v`  | <Leader>be  | `encode.base64_encode` | Encode base64 string                       |
+| `v`  | <Leader>bd  | `encode.base64_decode` | Decode base64 string                       |
+| `n`  | <Leader>mip | `net.my_ip`            | Get my public IP address                   |
+
+### Available Commands
+
+- `json.parse`
+- `json.escape`
+- `encode.base64_encode`
+- `encode.base64_decode`
+- `net.my_ip`
+
+![image](https://github.com/user-attachments/assets/f7cb4898-b929-47fc-8416-ebd1fa03e795)
 
 ## Contributing
 

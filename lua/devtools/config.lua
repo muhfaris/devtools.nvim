@@ -3,7 +3,7 @@ local _actions = require("devtools.actions")
 
 function _default_conf.register_tools()
 	local completed_tools = {}
-	for category, toolset in pairs(_actions) do
+	for category, toolset in pairs(_actions.tools) do
 		for tool, func in pairs(toolset) do
 			if func.is_command then
 				table.insert(completed_tools, {
