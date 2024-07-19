@@ -2,7 +2,13 @@
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J.svg)](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J)
+| Get My Public IP                                                                                                         | Escape JSON                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| [![asciicast](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J.svg)](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J) | [![asciicast](https://asciinema.org/a/wdd7vhRRuBNT2Yi3j6Om8DgGx.svg)](https://asciinema.org/a/wdd7vhRRuBNT2Yi3j6Om8DgGx) |
+
+| Parse JSON                                                                                                               |     |
+| ------------------------------------------------------------------------------------------------------------------------ | --- |
+| [![asciicast](https://asciinema.org/a/5bTwLmv5TCffq4xgGrkOIQYiP.svg)](https://asciinema.org/a/5bTwLmv5TCffq4xgGrkOIQYiP) |     |
 
 ## Overview
 
