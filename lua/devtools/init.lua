@@ -53,9 +53,19 @@ function M.execute(...)
 
 	local _tool = M.tools[tool_name]
 	if _tool ~= nil and args ~= nil then
-		_tool(args)
+		local result = _tool(args)
+		-- if result is not string use vim.inspect
+		if type(result) ~= "string" then
+			result = vim.inspect(result)
+		end
+		print(result)
 	elseif _tool ~= nil then
-		_tool(true)
+		local result = _tool(true)
+		-- if result is not string use vim.inspect
+		if type(result) ~= "string" then
+			result = vim.inspect(result)
+		end
+		print(result)
 	else
 		vim.api.nvim_out_write("Tool not found: " .. tool_name .. "\n")
 	end

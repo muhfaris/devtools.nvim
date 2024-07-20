@@ -11,8 +11,7 @@ function JSON.json_parse(is_command)
 	end
 
 	if text == "" then
-		print("No text selected")
-		return
+		return "No text selected"
 	end
 
 	local raw = _v.fn.json_decode(text)
@@ -30,15 +29,14 @@ function JSON.json_escape(is_command)
 	end
 
 	if text == "" then
-		print("No text selected")
-		return
+		return "No text selected"
 	end
 
 	local json_string = vim.fn.json_encode(text)
 
 	-- Escape double quotes for the JSON string
 	local remove_t = json_string:gsub("\\t", "")
-	_c.replace_selection(remove_t)
+	return _c.replace_selection(remove_t)
 end
 
 return JSON

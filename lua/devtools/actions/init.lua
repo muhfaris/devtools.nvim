@@ -3,6 +3,7 @@ local _net = require("devtools.actions.network")
 local _word = require("devtools.actions.word")
 local _file = require("devtools.actions.file")
 local _encode = require("devtools.actions.encode")
+local _jwt = require("devtools.actions.jwt")
 
 local A = {
 	tools = {
@@ -59,6 +60,18 @@ local A = {
 				func = _encode.base64_decode,
 				is_command = true,
 				is_key_bind = false,
+			},
+		},
+		jwt = {
+			decode = {
+				func = _jwt.parse,
+				is_command = true,
+				is_key_bind = false,
+			},
+			decode_token = {
+				func = _jwt.v_parse,
+				is_command = false,
+				is_key_bind = true,
 			},
 		},
 	},

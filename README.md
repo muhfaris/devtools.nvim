@@ -6,9 +6,10 @@
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
 | [![asciicast](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J.svg)](https://asciinema.org/a/9Gs6j4HPcbXYdmVgR97f13I0J) | [![asciicast](https://asciinema.org/a/wdd7vhRRuBNT2Yi3j6Om8DgGx.svg)](https://asciinema.org/a/wdd7vhRRuBNT2Yi3j6Om8DgGx) |
 
-| Parse JSON                                                                                                               |     |
-| ------------------------------------------------------------------------------------------------------------------------ | --- |
-| [![asciicast](https://asciinema.org/a/5bTwLmv5TCffq4xgGrkOIQYiP.svg)](https://asciinema.org/a/5bTwLmv5TCffq4xgGrkOIQYiP) |     |
+| Parse JSON                                                                                                               | Decode JWT Token                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| [![asciicast](https://asciinema.org/a/5bTwLmv5TCffq4xgGrkOIQYiP.svg)](https://asciinema.org/a/5bTwLmv5TCffq4xgGrkOIQYiP) | ![image](https://github.com/user-attachments/assets/3bb9f0f7-7423-4b86-92b3-c19405021565) |
+|                                                                                                                          |
 
 ## Overview
 
@@ -118,6 +119,7 @@ return {
 | `v`  | <Leader>be  | `encode.base64_encode` | Encode base64 string                       |
 | `v`  | <Leader>bd  | `encode.base64_decode` | Decode base64 string                       |
 | `n`  | <Leader>mip | `net.my_ip`            | Get my public IP address                   |
+| `n`  | <Leader>jwt | `jwt.decode_token`     | Decode JWT token                           |
 
 ### Available Commands
 

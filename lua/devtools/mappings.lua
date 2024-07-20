@@ -25,6 +25,10 @@ mappings.default = {
 			func = _actions.net.my_ip.func,
 			desc = "Get my public IP address",
 		},
+		["<Leader>jwt"] = {
+			func = _actions.jwt.decode_token.func,
+			desc = "Decode JWT token",
+		},
 	},
 }
 

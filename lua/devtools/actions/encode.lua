@@ -55,43 +55,42 @@ function E.v_base64_encode()
 	local text = _c.get_visual_selection()
 	local encoded = base64_encode(text)
 	encoded = encoded:gsub("%s+", "") -- remove any whitespace
-	print(encoded)
-	_c.replace_selection(encoded)
+	return _c.replace_selection(encoded)
 end
 
 function E.v_base64_decode()
 	local text = _c.get_visual_selection()
 	local decoded = base64_decode(text)
 	decoded = decoded:gsub("%s+", "") -- remove any whitespace
-	_c.replace_selection(decoded)
+	return _c.replace_selection(decoded)
 end
 
 function E.base64_encode(...)
-	local args = { ... }
-	local texts = {}
-	for _, arg in pairs(args) do
-		for _, value in pairs(arg) do
-			table.insert(texts, value)
-		end
+	local texts = ...
+	local text = texts
+
+	-- if table type
+	if type(texts) == "table" then
+		text = table.concat(texts, " ")
 	end
-	local text = table.concat(texts, "")
+
 	local encoded = base64_encode(text)
 	encoded = encoded:gsub("%s+", "") -- remove any whitespace
-	print(encoded)
+	return encoded
 end
 
 function E.base64_decode(...)
-	local args = { ... }
-	local texts = {}
-	for _, arg in pairs(args) do
-		for _, value in pairs(arg) do
-			table.insert(texts, value)
-		end
+	local texts = ...
+	local text = texts
+
+	-- if table type
+	if type(texts) == "table" then
+		text = table.concat(texts, " ")
 	end
-	local text = table.concat(texts, "")
+
 	local decoded = base64_decode(text)
-	decoded = decoded:gsub("%s+", "") -- remove any whitespace
-	print(decoded)
+	-- decoded = decoded:gsub("%s+", "") -- remove any whitespace
+	return decoded
 end
 
 return E
