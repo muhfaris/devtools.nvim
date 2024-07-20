@@ -22,6 +22,7 @@ The plugin [muhfaris/devtools.nvim](https://github.com/muhfaris/devtools.nvim) i
 - Parse and escape JSON
 - Fetch my public IP address
 - Encode and decode base64
+- Decode JWT token
 
 ## Installation
 
