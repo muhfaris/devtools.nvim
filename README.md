@@ -128,6 +128,7 @@ return {
 - `encode.base64_encode`
 - `encode.base64_decode`
 - `net.my_ip`
+- `jwt.decode`
 
 ![image](https://github.com/user-attachments/assets/f7cb4898-b929-47fc-8416-ebd1fa03e795)
 
