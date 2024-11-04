@@ -113,14 +113,14 @@ return {
 
 ### Default Key Mappings
 
-| Mode | Key                  | Actions Name             | Description                                |
-| ---- | -------------------- | ------------------------ | ------------------------------------------ |
-| `v`  | <Leader><Leader>djp  | `json.parse`             | Parse escaped json string into json object |
-| `v`  | <Leader><Leader>dje  | `json.escape`            | Parse json object into escaped json string |
-| `v`  | <Leader><Leader>dbe  | `encode.v_base64_encode` | Encode base64 string from selection text   |
-| `v`  | <Leader><Leader>dbd  | `encode.v_base64_decode` | Decode base64 string from selection text   |
-| `n`  | <Leader><Leader>dip  | `net.my_ip`              | Get my public IP address                   |
-| `n`  | <Leader><Leader>djwt | `jwt.decode_token`       | Decode JWT token                           |
+| Mode | Key                    | Actions Name             | Description                                |
+| ---- | ---------------------- | ------------------------ | ------------------------------------------ |
+| `v`  | `<Leader><Leader>djp`  | `json.parse`             | Parse escaped json string into json object |
+| `v`  | `<Leader><Leader>dje`  | `json.escape`            | Parse json object into escaped json string |
+| `v`  | `<Leader><Leader>dbe`  | `encode.v_base64_encode` | Encode base64 string from selection text   |
+| `v`  | `<Leader><Leader>dbd`  | `encode.v_base64_decode` | Decode base64 string from selection text   |
+| `n`  | `<Leader><Leader>dip`  | `net.my_ip`              | Get my public IP address                   |
+| `n`  | `<Leader><Leader>djwt` | `jwt.decode_token`       | Decode JWT token                           |
 
 ### Available Commands
 
