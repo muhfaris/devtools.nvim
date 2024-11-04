@@ -58,14 +58,12 @@ function M.execute(...)
 		if type(result) ~= "string" then
 			result = vim.inspect(result)
 		end
-		print(result)
 	elseif _tool ~= nil then
 		local result = _tool(true)
 		-- if result is not string use vim.inspect
 		if type(result) ~= "string" then
 			result = vim.inspect(result)
 		end
-		print(result)
 	else
 		vim.api.nvim_out_write("Tool not found: " .. tool_name .. "\n")
 	end
@@ -81,7 +79,27 @@ function M.complete_tools(arglead, cmdline, cursorpos)
 		_loaded = true
 	end
 
-	return M.tools_name
+	-- If no arglead, return all tools
+	if arglead == "" then
+		return M.tools_name
+	end
+
+	-- Filter tools based on arglead
+	local matches = {}
+	for _, tool_name in ipairs(M.tools_name) do
+		-- Split the command into category and tool
+		local category, tool = tool_name:match("([^.]+)%.([^.]+)")
+
+		-- Check if arglead matches the category
+		if category and category:lower():find("^" .. arglead:lower()) then
+			table.insert(matches, tool_name)
+			-- Check if arglead matches the full command pattern (e.g., "json.p")
+		elseif tool_name:lower():find("^" .. arglead:lower()) then
+			table.insert(matches, tool_name)
+		end
+	end
+
+	return matches
 end
 
 function M.load_tools()

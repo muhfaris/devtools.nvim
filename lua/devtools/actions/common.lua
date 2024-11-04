@@ -16,7 +16,7 @@ end
 
 function _common.replace_selection(data)
 	-- Delete the selected text
-	_v.cmd("normal! gvd")
+	_v.cmd("normal! gvc")
 	-- Put the new text in the register
 	_v.fn.setreg("v", data)
 	-- Paste the new text

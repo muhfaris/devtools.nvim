@@ -42,12 +42,12 @@ local A = {
 		},
 		encode = {
 			v_base64_encode = {
-				func = _encode.base64_encode,
+				func = _encode.v_base64_encode,
 				is_command = false,
 				is_key_bind = true,
 			},
 			v_base64_decode = {
-				func = _encode.base64_decode,
+				func = _encode.v_base64_decode,
 				is_command = false,
 				is_key_bind = true,
 			},

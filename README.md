@@ -113,21 +113,21 @@ return {
 
 ### Default Key Mappings
 
-| Mode | Key         | Actions Name           | Description                                |
-| ---- | ----------- | ---------------------- | ------------------------------------------ |
-| `v`  | <Leader>jp  | `json.parse`           | Parse escaped json string into json object |
-| `v`  | <Leader>je  | `json.escape`          | Parse json object into escaped json string |
-| `v`  | <Leader>be  | `encode.base64_encode` | Encode base64 string                       |
-| `v`  | <Leader>bd  | `encode.base64_decode` | Decode base64 string                       |
-| `n`  | <Leader>mip | `net.my_ip`            | Get my public IP address                   |
-| `n`  | <Leader>jwt | `jwt.decode_token`     | Decode JWT token                           |
+| Mode | Key                  | Actions Name             | Description                                |
+| ---- | -------------------- | ------------------------ | ------------------------------------------ |
+| `v`  | <Leader><Leader>djp  | `json.parse`             | Parse escaped json string into json object |
+| `v`  | <Leader><Leader>dje  | `json.escape`            | Parse json object into escaped json string |
+| `v`  | <Leader><Leader>dbe  | `encode.v_base64_encode` | Encode base64 string from selection text   |
+| `v`  | <Leader><Leader>dbd  | `encode.v_base64_decode` | Decode base64 string from selection text   |
+| `n`  | <Leader><Leader>dip  | `net.my_ip`              | Get my public IP address                   |
+| `n`  | <Leader><Leader>djwt | `jwt.decode_token`       | Decode JWT token                           |
 
 ### Available Commands
 
 - `json.parse`
 - `json.escape`
-- `encode.base64_encode`
-- `encode.base64_decode`
+- `encode.base64_encode` (for command only :DevTools encode.base64_encode)
+- `encode.base64_decode` (for command only :DevTools encode.base64_decode)
 - `net.my_ip`
 - `jwt.decode`
 

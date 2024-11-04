@@ -10,7 +10,8 @@ function N.fetch_ip()
 	handle:close()
 
 	if result then
-		return "Your public IP address is: " .. result
+		print("Your public IP address is: " .. result)
+		return
 	else
 		return "Failed to retrieve IP address."
 	end

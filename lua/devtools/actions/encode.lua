@@ -60,8 +60,8 @@ end
 
 function E.v_base64_decode()
 	local text = _c.get_visual_selection()
+	text = text:gsub("%s+", "") -- remove any whitespace
 	local decoded = base64_decode(text)
-	decoded = decoded:gsub("%s+", "") -- remove any whitespace
 	return _c.replace_selection(decoded)
 end
 
@@ -76,7 +76,7 @@ function E.base64_encode(...)
 
 	local encoded = base64_encode(text)
 	encoded = encoded:gsub("%s+", "") -- remove any whitespace
-	return encoded
+	print(encoded)
 end
 
 function E.base64_decode(...)
@@ -90,7 +90,7 @@ function E.base64_decode(...)
 
 	local decoded = base64_decode(text)
 	-- decoded = decoded:gsub("%s+", "") -- remove any whitespace
-	return decoded
+	print(decoded)
 end
 
 return E

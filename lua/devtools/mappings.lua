@@ -3,31 +3,31 @@ local _actions = require("devtools.actions").tools
 
 mappings.default = {
 	v = {
-		["<Leader>jp"] = {
+		["<Leader><Leader>djp"] = {
 			func = _actions.json.parse.func,
-			desc = "Parse json string to object",
+			desc = "DevTools: Parse json string to object",
 		},
-		["<Leader>je"] = {
+		["<Leader><Leader>dje"] = {
 			func = _actions.json.escape.func,
-			desc = "Escape the json object",
+			desc = "DevTools: Escape the json object",
 		},
-		["<Leader>be"] = {
+		["<Leader><Leader>dbe"] = {
 			func = _actions.encode.v_base64_encode.func,
-			desc = "Encode base64",
+			desc = "DevTools: Encode base64",
 		},
-		["<Leader>bd"] = {
+		["<Leader><Leader>dbd"] = {
 			func = _actions.encode.v_base64_decode.func,
-			desc = "Decode base64",
+			desc = "DevTools: Decode base64",
 		},
 	},
 	n = {
-		["<Leader>mip"] = {
+		["<Leader><Leader>dip"] = {
 			func = _actions.net.my_ip.func,
-			desc = "Get my public IP address",
+			desc = "DevTools: Get my public IP address",
 		},
-		["<Leader>jwt"] = {
+		["<Leader><Leader>djwt"] = {
 			func = _actions.jwt.decode_token.func,
-			desc = "Decode JWT token",
+			desc = "DevTools: Decode JWT token",
 		},
 	},
 }
